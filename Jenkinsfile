@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools { maven 'maven3.5.4'}
+    tools { maven 'mvn3.5.4'}
     stages {
         stage('Build') {
             steps {

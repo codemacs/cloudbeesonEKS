@@ -49,7 +49,7 @@ post {
   failure {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def fail_resp =["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://developer.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def fail_resp =["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://api.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(fail_resp)
        } //credentials
       } //script
@@ -59,7 +59,7 @@ post {
   success {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def success_resp = ["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://developer.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def success_resp = ["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://api.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(success_resp)
        } //credentials
       } //script

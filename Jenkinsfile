@@ -1,4 +1,4 @@
-def NOTIFY_EMAIL = 'anassiry@salesforce.com'
+def NOTIFY_EMAIL = 'hmnassiry@gmail.com'
 node {
  checkout scm
  sh 'git clean -Xdf'

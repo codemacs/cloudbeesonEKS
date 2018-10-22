@@ -20,21 +20,26 @@ pipeline {
 
  parameters {
   string(name: 'credentialId', defaultValue: 'hmnassiry_github')
-  booleanParam(name: 'Kumonium', defaultValue: true)
  }
 
  stages {
    
      stage('Compile'){
-         sh 'mvn -B -DskipTests clean compile' 
+      steps{
+         sh 'mvn -B -DskipTests clean compile'
+      }
      }
      
      stage('Junit'){
-         sh 'mvn test' 
+      steps{
+         sh 'mvn test'
+      }
      }
      
      stage('Package'){
+      steps{
          sh 'mvm package'
+      }
      }
   
  } //stages

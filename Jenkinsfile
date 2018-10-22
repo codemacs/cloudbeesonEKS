@@ -5,9 +5,7 @@ node {
 }
 
 pipeline {
- agent {
-  label any
- }
+ agent any
  tools {
   maven 'mvn3.5.4'
  }

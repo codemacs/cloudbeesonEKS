@@ -59,7 +59,7 @@ post {
   success {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def success_resp = ["curl", "-s", "-X", "POST", "-H", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://\"${PASSWORD}\":x-oauth-basic@api.github.com/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def success_resp = ["curl", "-s", "-X", "POST", "-H", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://86964332839141ab1ccf6571d24fb1d5cc0081f6:x-oauth-basic@api.github.com/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(success_resp)
        } //credentials
       } //script

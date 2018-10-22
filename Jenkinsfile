@@ -45,12 +45,7 @@ pipeline {
   
  } //stages
 
-post {
-  always {
-   publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '\\target\\surefire-reports\\', reportFiles: 'emailable-report.html', reportName: 'Sanity report', reportTitles: ''])
-   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-  }
-  
+post {  
   failure {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {

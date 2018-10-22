@@ -36,8 +36,11 @@ pipeline {
      
      stage('Package'){
       steps{
-         sh 'mvm package'
-      }
+             git url: 'https://github.com/hmnassiry/simple-java-maven-app.git'
+             withMaven(maven: 'mvn3.5.4') {
+                  sh "mvn package"
+             }
+       }
      }
   
  } //stages

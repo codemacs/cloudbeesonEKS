@@ -45,14 +45,13 @@ pipeline {
 post {
   always {
    publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '\\target\\surefire-reports\\', reportFiles: 'emailable-report.html', reportName: 'Sanity report', reportTitles: ''])
-   emailext mimeType: 'text/html', body: 'Here is your Kumonium Report for build: $BUILD_URL ${FILE,path="myKumProj/target/surefire-reports/emailable-report.html"}', subject: 'Kumonium Report for Build # $BUILD_NUMBER - $JOB_NAME', to: 'anassiry@salesforce.com'
    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
   }
   
   failure {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def fail_resp =["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://github.com/api/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def fail_resp =["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://developer.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(fail_resp)
        } //credentials
       } //script
@@ -62,7 +61,7 @@ post {
   success {
       script {
         withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def success_resp = ["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://github.com/api/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def success_resp = ["curl", "-s", "-X", "POST", "-H", "authorization: Bearer ${PASSWORD}", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://developer.github.com/v3/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(success_resp)
        } //credentials
       } //script

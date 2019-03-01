@@ -25,7 +25,9 @@ pipeline {
      stage('Compile'){
       steps{
          //sh 'mvn -B -DskipTests clean compile'
+       script {
          java -version
+       }
       }
      }
      

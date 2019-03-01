@@ -17,7 +17,7 @@ pipeline {
  }
 
  parameters {
-  string(name: 'credentialId', defaultValue: 'hmnassiry_github', description:'github write access')
+  string(name: 'credentialId', defaultValue: 'hnassiry_github', description:'github write access')
  }
 
  stages {

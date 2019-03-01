@@ -1,4 +1,4 @@
-def NOTIFY_EMAIL = 'hmnassiry@gmail.com'
+def NOTIFY_EMAIL = 'anassiry@salesforce.com'
 node {
  checkout scm
  sh 'git clean -Xdf'
@@ -36,7 +36,7 @@ pipeline {
      
      stage('Package'){
       steps{
-             git url: 'https://github.com/hmnassiry/simple-java-maven-app.git'
+             git url: 'https://github.com/McCheeseJava/simple-java-maven-app.git'
              withMaven(maven: 'mvn3.5.4') {
                   sh "mvn package"
              }
@@ -48,8 +48,8 @@ pipeline {
 post {  
   failure {
       script {
-        withCredentials([usernamePassword(credentialsId: 'hmnassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        def fail_resp =["curl", "-s", "-X", "POST", "-H", "client_id", "${USERNAME}", "client_secret", "${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://api.github.com/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        withCredentials([usernamePassword(credentialsId: 'anassiry_github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+        def fail_resp =["curl", "-s", "-X", "POST", "-H", "client_id", "${USERNAME}", "client_secret", "${PASSWORD}", "-d", "{\"state\": \"failure\",\"context\": \"Build Status\"}", "https://api.github.com/repos/McCheeseJava/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(fail_resp)
        } //credentials
       } //script
@@ -58,7 +58,7 @@ post {
   
   success {
       script {
-        def success_resp = ["curl", "-v", "-X", "POST", "-H", "Authorization: token 86964332839141ab1ccf6571d24fb1d5cc0081f6", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://api.github.com/repos/hmnassiry/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
+        def success_resp = ["curl", "-v", "-X", "POST", "-H", "Authorization: token 86964332839141ab1ccf6571d24fb1d5cc0081f6", "-d", "{\"state\": \"success\", \"context\": \"Build Status\"}", "https://api.github.com/repos/McCheeseJava/simple-java-maven-app/statuses/$GIT_COMMIT"].execute().text
         print(success_resp)
       } //script
       cleanWs cleanWhenSuccess: true, deleteDirs: true

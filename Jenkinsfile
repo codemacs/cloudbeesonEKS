@@ -7,7 +7,8 @@ node {
 pipeline {
  agent any
  tools {
-  maven 'mvn3.5.4'
+  maven 'Maven 3.6.0'
+  Java 'Java 8u202'
  }
 
  options {

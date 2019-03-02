@@ -2,13 +2,16 @@ def NOTIFY_EMAIL = 'anassiry@salesforce.com'
 node {
  checkout scm
  sh 'git clean -Xdf'
+ jdk = tool name: 'Java 8u202'
+ env.JAVA_HOME = "${jdk}"
+ echo "jdk installation path is: ${jdk}"
 }
 
 pipeline {
  agent any
  tools {
   maven 'Maven 3.6.0'
-  jdk 'Java 8u202'
+  jdk ''
  }
 
  options {
@@ -25,7 +28,8 @@ pipeline {
      stage('Compile'){
       steps{
          //sh 'mvn -B -DskipTests clean compile'
-         sh '${jdk}/bin/java -version'
+         sh "${jdk}/bin/java -version" 
+         sh '$JAVA_HOME/bin/java -version'
       }
      }
      

@@ -28,20 +28,19 @@ pipeline {
        }
      }
      
-     stage('Junit'){
+   stage('Package'){
       steps{
-         sh 'mvn test'
+         withMaven(maven: 'Maven3.6.0') {
+           sh "mvn test"
+         }
       }
-     }
-     
-     stage('Package'){
+   }
+  
+   stage('Junit'){
       steps{
-             git url: 'https://github.com/McCheeseJava/simple-java-maven-app.git'
-             withMaven(maven: 'Maven 3.6.0') {
-                  sh "mvn test"
-             }
-       }
-     }
+         sh 'java -version'
+      }
+   }
   
  } //stages
 

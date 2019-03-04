@@ -1,13 +1,13 @@
 def NOTIFY_EMAIL = 'anassiry@salesforce.com'
-node {
- jdk = tool name: 'Java8u201'	
- env.JAVA_HOME = "${jdk}"	
-}
 
 pipeline {
  agent any
 
-
+ tools {
+  maven 'Maven3.6.0'
+  jdk 'Java8u201'
+ }
+ 
  options {
   timeout(time: 2, unit: 'HOURS')
   disableConcurrentBuilds()
@@ -19,12 +19,15 @@ pipeline {
 
  stages {
    
-     stage('Compile'){
-      steps{
-         //sh 'mvn -B -DskipTests clean compile'
-         sh '$jdk/bin/java -version'
-      }
-     }
+     stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
      
      stage('Junit'){
       steps{

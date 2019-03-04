@@ -7,6 +7,8 @@ node {
 pipeline {
  agent any
  tools {
+  jdk = tool name: 'Java8u201'
+  env.JAVA_HOME = "${jdk}"
   maven 'Maven3.6.0'
   jdk 'Java8u201'
  }
@@ -39,7 +41,7 @@ pipeline {
       steps{
              git url: 'https://github.com/McCheeseJava/simple-java-maven-app.git'
              withMaven(maven: 'Maven 3.6.0') {
-                  sh "mvn package"
+                  sh "mvn test"
              }
        }
      }

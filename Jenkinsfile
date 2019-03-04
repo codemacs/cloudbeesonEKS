@@ -25,7 +25,7 @@ pipeline {
      stage('Compile'){
       steps{
          //sh 'mvn -B -DskipTests clean compile'
-         sh 'java -version'
+         sh '$jdk/bin/java -version'
       }
      }
      

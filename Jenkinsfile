@@ -21,7 +21,10 @@ pipeline {
         
     stage ('Initialize') {
       steps {
-         sh '''
+       script {
+        sleep (100)
+       }
+       sh '''
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
          ls -la /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/ 

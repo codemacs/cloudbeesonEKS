@@ -26,6 +26,7 @@ pipeline {
          echo "M2_HOME = ${M2_HOME}"
          ls -la /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/ 
          java -version 
+         /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/java -version
          ''' 
        }
      }

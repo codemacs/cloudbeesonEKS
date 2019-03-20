@@ -25,7 +25,7 @@ pipeline {
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
          which java
-         /home/jenkins/tools/hudson.model.JDK/Java8u191/bin/java -version 
+         /home/jenkins/tools/hudson.model.JDK/Java8u161/bin/java -version 
          ''' 
        }
      }

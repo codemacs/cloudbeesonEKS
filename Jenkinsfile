@@ -37,7 +37,7 @@ pipeline {
   
    stage('Junit'){
       steps{
-         sh 'java -version'
+         sh '/home/jenkins/tools/hudson.model.JDK/Java8u191/bin/java -version'
       }
    }
   

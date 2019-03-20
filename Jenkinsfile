@@ -5,7 +5,7 @@ pipeline {
 
  tools {
   maven 'Maven3.6.0'
-  jdk 'Java8u201'
+  jdk 'Java8u191'
  }
  
  options {
@@ -24,9 +24,7 @@ pipeline {
          sh '''
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
-         ls -la /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/ 
          java -version 
-         /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/java -version
          ''' 
        }
      }

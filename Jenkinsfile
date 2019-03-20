@@ -14,17 +14,14 @@ pipeline {
  }
 
  parameters {
-  string(name: 'credentialId', defaultValue: 'anassiry_github', description:'github write access')
+  string(name: 'credentialId', defaultValue: 'github', description:'github write access')
  }
 
  stages {
         
     stage ('Initialize') {
       steps {
-       script {
-        sleep (100)
-       }
-       sh '''
+         sh '''
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
          ls -la /home/jenkins/tools/hudson.model.JDK/Java8u201/bin/ 

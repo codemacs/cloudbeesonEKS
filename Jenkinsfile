@@ -31,9 +31,7 @@ pipeline {
      
    stage('Package'){
       steps{
-         withMaven(maven: 'Maven3.6.0') {
-           sh "mvn test"
-         }
+         sh "mvn test"
       }
    }
   

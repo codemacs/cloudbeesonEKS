@@ -26,7 +26,7 @@ pipeline {
          echo "M2_HOME = ${M2_HOME}"
          sleep 1000
          which java
-         /home/jenkins/tools/hudson.model.JDK/Java8u181/bin/java -version
+         java -version
          ''' 
        }
      }

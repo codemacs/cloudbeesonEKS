@@ -24,7 +24,6 @@ pipeline {
          sh '''
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
-         sleep 1000
          which java
          java -version
          ''' 

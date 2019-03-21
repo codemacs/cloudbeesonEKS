@@ -24,7 +24,7 @@ pipeline {
          sh '''
          echo "PATH = ${PATH}"
          echo "M2_HOME = ${M2_HOME}"
-         sleep 200
+         sleep 1000
          which java
          /home/jenkins/tools/hudson.model.JDK/Java8u181/bin/java -version
          ''' 

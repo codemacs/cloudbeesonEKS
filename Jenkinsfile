@@ -2,11 +2,6 @@ def NOTIFY_EMAIL = 'anassiry@salesforce.com'
 
 pipeline {
  agent any
-
- tools {
-  maven 'Maven3.3.9'
-  jdk 'Java8u181'
- }
  
  options {
   timeout(time: 2, unit: 'HOURS')

@@ -7,6 +7,11 @@ pipeline {
   timeout(time: 2, unit: 'HOURS')
   disableConcurrentBuilds()
  }
+ 
+ tools {	
+  maven 'Maven3.6.0'	
+  jdk 'JDK8202'	
+ }
 
  parameters {
   string(name: 'credentialId', defaultValue: 'github', description:'github write access')

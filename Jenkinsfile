@@ -32,13 +32,19 @@ pipeline {
       steps{
          sh "mvn test"
        script {
-        sleep 200
+        jq
        }
       }
    }
   
+  stage('Install Dependencies') {
+   steps {
+    sh 'npm install'
+    sh 'npm install npm@latest -g'
+    sleep 200
+   }
+  }
+  
   
  } //stages
-
-
 } //pipeline

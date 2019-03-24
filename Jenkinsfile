@@ -37,7 +37,9 @@ pipeline {
   stage('Install Dependencies') {
    steps {
       sh 'npm run lint'
-      sleep 200
+      script {
+        sleep 200
+      }
    }
   }
   

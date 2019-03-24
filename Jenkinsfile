@@ -43,7 +43,7 @@ pipeline {
    }
   }
   
-  tage('Test jq') {
+  stage('Test jq') {
    steps {
       sh 'jq'
       script {

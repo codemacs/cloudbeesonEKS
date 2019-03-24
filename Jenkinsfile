@@ -111,7 +111,7 @@ pipeline {
    } //parallel
   } //Test
 
-  stage('3rd party Docker images via Jenkinsfile') {
+  stage('3rd party Docker Images') {
    parallel {
 
     stage('SFDX') {

@@ -37,9 +37,6 @@ pipeline {
   stage('Test Node') {
    steps {
       sh 'node -v'
-      script {
-        sleep 200
-      }
    }
   }
   

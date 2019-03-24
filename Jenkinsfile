@@ -77,7 +77,7 @@ pipeline {
   stage('Test aws-cli') {
    steps {
       sh '''
-        aws iam list-users
+        aws
       '''
       script {
         sleep 1

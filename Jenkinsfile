@@ -1,158 +1,151 @@
-def NOTIFY_EMAIL = 'anassiry@salesforce.com'
-
 pipeline {
  agent {
-    kubernetes {
-      label 'CD-Team-Test'
-      defaultContainer 'jnlp'
-      yamlFile 'KubernetesPod.yaml'
-    }
- }
- 
- tools {	
-  maven 'CJOC-Maven3.6.0'	
-  jdk 'CJOC-JDK8202'	
+  kubernetes {
+   label 'CD-Team-Test'
+   defaultContainer 'jnlp'
+   yamlFile 'KubernetesPod.yaml'
+  }
  }
 
-options {
+ tools {
+  maven 'CJOC-Maven3.6.0'
+  jdk 'CJOC-JDK8202'
+ }
+
+ options {
   timeout(time: 2, unit: 'HOURS')
   disableConcurrentBuilds()
-}
+ }
 
  parameters {
-  string(name: 'credentialId', defaultValue: 'github', description:'github write access')
+  string(name: 'credentialId', defaultValue: 'github', description: 'github write access')
  }
 
  stages {
-        
-  stage ('Test') {
+
+  stage('Test CJOC Tools') {
    parallel {
-    stage ('Test Java') {
-      steps {
-         sh '''
-         which java
-         java -version
-         ''' 
-       }
+    stage('Java') {
+     steps {
+      sh '''
+      which java
+      java -version 
+      '''
      }
-     
-   stage('Test Maven'){
-      steps{
-         sh "mvn --version"
-      }
-   }
-  
-  stage('Test Git') {
-   steps {
+    }
+
+    stage('Maven') {
+     steps {
+      sh "mvn --version"
+     }
+    }
+
+   } //parallel
+  } //stage
+
+
+  stage('Test CloudBees Base Agent Image') {
+   parallel {
+    stage('Git') {
+     steps {
       sh '''
-        git clone https://github.com/forcedotcom/cli.git
+      git clone https://github.com/forcedotcom/cli.git
       '''
-   }
-  }
-  
-  stage('Test Node') {
-   steps {
+     }
+    }
+
+    stage('NodeJS') {
+     steps {
       sh 'node -v'
-   }
-  }
-  
-  stage('Test jq') {
-   steps {
-      sh '''
-        curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' | jq '.[0]'
-      '''
-   }
-  }
-  
-  stage('Test Python2') {
-   steps {
-      sh '''
-        python --version
-      '''
-   }
-  }
-    
-  stage('Test Python3') {
-   steps {
-      sh '''
-        python3 --version
-      '''
-   }
-  }
-    
-  stage('Test Selenium') {
-   steps {
-      sh '''
-        pip freeze
-      '''
-   }
-  }
-  
-   stage('Test perl') {
-   steps {
-      sh '''
-        perl -v
-      '''
+     }
     }
-  }
-    
-  stage('Test gcc') {
-   steps {
+
+    stage('JQ') {
+     steps {
       sh '''
-        gcc -v
+      curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' | jq '.[0]'
       '''
+     }
     }
-  }
-   
+
+    stage('Python2') {
+     steps {
+      sh '''
+      python --version
+      '''
+     }
+    }
+
+    stage('Selenium') {
+     steps {
+      sh '''
+      pip freeze
+      '''
+     }
+    }
+
+    stage('Perl') {
+     steps {
+      sh '''
+      perl - v 
+      '''
+     }
+    }
+
+    stage('GCC') {
+     steps {
+      sh '''
+      gcc -v 
+      '''
+     }
+    }
+
+    stage('aws-cli') {
+     steps {
+      sh '''
+      aws help
+      '''
+     }
+    }
+
    } //parallel
   } //Test
-  
-  stage('Test 2') {
+
+  stage('3rd party Docker images via Jenkinsfile') {
    parallel {
-    
-    stage('Test sfdx') {
-      steps {
-        container('sfdx') {
-          sh 'sfdx --version'
-        } //container
-       } //steps
-     } //stage
-     
-     stage('Test ruby') {
-      steps {
-        container('ruby') {
-          sh 'ruby -v'
-        } //container
-       } //steps
-     } //stage
-    
-    stage('Test jmeter') {
-      steps {
-          sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
-       } //steps
-     } //stage
-    
-    stage('Test aws-cli') {
-    steps {
-      sh '''
-        aws help
-      '''
-    }
-  }
-     
-    } //parallel
-   } //stage 
-  
-   stage('tree command') {
-    steps {
-      sh '''
-        tree
-      '''
-      script {
-        sleep 1
-      } //script
+
+    stage('SFDX') {
+     steps {
+      container('sfdx') {
+       sh 'sfdx --version'
+      } //container
      } //steps
-   } //stage
-  
+    } //stage
+
+    stage('Ruby') {
+     steps {
+      container('ruby') {
+       sh 'ruby -v'
+      } //container
+     } //steps
+    } //stage
+
+    stage('Jmeter') {
+     steps {
+      sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
+     } //steps
+    } //stage
+
+    stage('Python3') {
+     steps {
+      sh '''
+      python3 --version
+      '''
+     }
+    }
+
+   } //parallel
+  } //stage 
+
  } //stages
 } //pipeline

@@ -45,6 +45,14 @@ pipeline {
       sh '''
         curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' | jq '.[0]'
       '''
+   }
+  }
+  
+  tage('Test tree') {
+   steps {
+      sh '''
+        tree
+      '''
       script {
         sleep 1
       }

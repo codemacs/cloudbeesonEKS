@@ -31,6 +31,9 @@ pipeline {
    stage('Package'){
       steps{
          sh "mvn test"
+       script {
+        sleep 200
+       }
       }
    }
   

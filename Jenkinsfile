@@ -53,6 +53,14 @@ pipeline {
       sh '''
         tree
       '''
+   }
+  }
+  
+  stage('Test Python') {
+   steps {
+      sh '''
+        python --version
+      '''
       script {
         sleep 1
       }

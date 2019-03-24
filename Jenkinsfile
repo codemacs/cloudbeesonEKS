@@ -1,17 +1,23 @@
 def NOTIFY_EMAIL = 'anassiry@salesforce.com'
 
 pipeline {
- agent any
+ agent {
+    kubernetes {
+      label 'CD-Team-Test'
+      defaultContainer 'jnlp'
+      yamlFile 'KubernetesPod.yaml'
+    }
+ }
+ 
+ //tools {	
+  //maven 'Maven3.5.4'	
+  //jdk 'JDK8202'	
+//}
 
 options {
   timeout(time: 2, unit: 'HOURS')
   disableConcurrentBuilds()
 }
- 
- tools {	
-  //maven 'Maven3.5.4'	
-  jdk 'JDK8202'	
- }
 
  parameters {
   string(name: 'credentialId', defaultValue: 'github', description:'github write access')
@@ -73,28 +79,49 @@ options {
       '''
    }
   }
+  
+   stage('Test perl') {
+   steps {
+      sh '''
+        perl -v
+      '''
+    }
+  }
+    
+  stage('Test gcc') {
+   steps {
+      sh '''
+        gcc -v
+      '''
+    }
+  }
     
   stage('Test aws-cli') {
    steps {
       sh '''
         aws help
       '''
-      script {
-        sleep 1
-      }
     }
   }
   
    } //parallel
   } //Test
   
+  stage('Test maven custom image') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+       }
+     }
+   }
+
   stage('Test tree') {
    steps {
       sh '''
         tree
       '''
       script {
-        sleep 100
+        sleep 1
       }
     }
   }

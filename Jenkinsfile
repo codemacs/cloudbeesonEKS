@@ -36,6 +36,14 @@ pipeline {
       }
    }
   
+  stage('Test Git') {
+   steps {
+      sh '''
+        git clone git@github.com:forcedotcom/sfdx-core.git
+      '''
+   }
+  }
+  
   stage('Test Node') {
    steps {
       sh 'node -v'
@@ -62,6 +70,15 @@ pipeline {
    steps {
       sh '''
         python --version
+      '''
+   }
+  }
+    
+  stage('Test Selenium') {
+   steps {
+      sh '''
+        pip freeze
+        selenium
       '''
       script {
         sleep 1

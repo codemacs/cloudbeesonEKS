@@ -36,12 +36,10 @@ pipeline {
   
   stage('Install Dependencies') {
    steps {
-    sh 'npm install'
-    sh 'npm install npm@latest -g'
-    sleep 200
+      sh 'npm run lint'
+      sleep 200
    }
   }
-  
   
  } //stages
 } //pipeline

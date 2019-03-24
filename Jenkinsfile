@@ -43,9 +43,7 @@ pipeline {
   stage('Test jq') {
    steps {
       sh '''
-      
-        jq '.[0] | {message: .commit.message, name: .commit.committer.name}'
-      
+        curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' | jq '.[0]'
       '''
       script {
         sleep 1

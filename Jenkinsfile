@@ -19,6 +19,8 @@ pipeline {
 
  stages {
         
+  stage ('Test') {
+   parallel {
     stage ('Test Java') {
       steps {
          sh '''
@@ -67,5 +69,7 @@ pipeline {
    }
   }
   
+   } //parallel
+  } //Test
  } //stages
 } //pipeline

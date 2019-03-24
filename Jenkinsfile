@@ -73,6 +73,17 @@ pipeline {
       '''
    }
   }
+    
+  stage('Test aws-cli') {
+   steps {
+      sh '''
+        aws iam list-users
+      '''
+      script {
+        sleep 1
+      }
+    }
+  }
   
    } //parallel
   } //Test

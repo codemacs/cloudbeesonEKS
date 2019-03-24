@@ -70,7 +70,6 @@ pipeline {
    steps {
       sh '''
         pip freeze
-        selenium
       '''
       script {
         sleep 1

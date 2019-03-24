@@ -39,7 +39,7 @@ pipeline {
   stage('Test Git') {
    steps {
       sh '''
-        git clone git@github.com:forcedotcom/sfdx-core.git
+        git clone https://github.com/forcedotcom/cli.git
       '''
    }
   }

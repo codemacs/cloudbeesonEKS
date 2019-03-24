@@ -71,9 +71,6 @@ pipeline {
       sh '''
         pip freeze
       '''
-      script {
-        sleep 1
-      }
    }
   }
   
@@ -85,7 +82,10 @@ pipeline {
       sh '''
         tree
       '''
-   }
+      script {
+        sleep 1
+      }
+    }
   }
   
  } //stages

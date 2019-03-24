@@ -77,7 +77,7 @@ pipeline {
   stage('Test aws-cli') {
    steps {
       sh '''
-        aws
+        aws help
       '''
       script {
         sleep 1

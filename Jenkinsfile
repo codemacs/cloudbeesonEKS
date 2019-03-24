@@ -30,7 +30,7 @@ pipeline {
      
    stage('Test Maven'){
       steps{
-         sh "mvn test"
+         sh "mvn --version"
       }
    }
   

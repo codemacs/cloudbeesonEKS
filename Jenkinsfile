@@ -48,7 +48,7 @@ pipeline {
    }
   }
   
-  tage('Test tree') {
+  stage('Test tree') {
    steps {
       sh '''
         tree

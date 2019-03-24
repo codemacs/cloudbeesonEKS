@@ -9,7 +9,7 @@ pipeline {
  }
  
  tools {	
-  maven 'Maven3.6.0'	
+  //maven 'Maven3.5.4'	
   jdk 'JDK8202'	
  }
 
@@ -19,7 +19,7 @@ pipeline {
 
  stages {
         
-    stage ('Initialize') {
+    stage ('Test Java') {
       steps {
          sh '''
          which java
@@ -28,15 +28,24 @@ pipeline {
        }
      }
      
-   stage('Package'){
+   stage('Test Maven'){
       steps{
          sh "mvn test"
       }
    }
   
-  stage('Install Dependencies') {
+  stage('Test Node') {
    steps {
       sh 'node -v'
+      script {
+        sleep 200
+      }
+   }
+  }
+  
+  tage('Test jq') {
+   steps {
+      sh 'jq'
       script {
         sleep 200
       }

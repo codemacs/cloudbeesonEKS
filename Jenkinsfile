@@ -83,7 +83,7 @@ pipeline {
         tree
       '''
       script {
-        sleep 1
+        sleep 100
       }
     }
   }

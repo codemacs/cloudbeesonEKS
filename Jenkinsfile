@@ -9,10 +9,10 @@ pipeline {
     }
  }
  
- //tools {	
-  //maven 'Maven3.5.4'	
-  //jdk 'JDK8202'	
-//}
+ tools {	
+  maven 'CJOC-Maven3.6.0'	
+  jdk 'CJOC-JDK8202'	
+ }
 
 options {
   timeout(time: 2, unit: 'HOURS')
@@ -64,10 +64,18 @@ options {
    }
   }
   
-  stage('Test Python') {
+  stage('Test Python2') {
    steps {
       sh '''
         python --version
+      '''
+   }
+  }
+    
+  stage('Test Python3') {
+   steps {
+      sh '''
+        python3 --version
       '''
    }
   }
@@ -95,36 +103,56 @@ options {
       '''
     }
   }
+   
+   } //parallel
+  } //Test
+  
+  stage('Test 2') {
+   parallel {
     
-  stage('Test aws-cli') {
-   steps {
+    stage('Test sfdx') {
+      steps {
+        container('sfdx') {
+          sh 'sfdx --version'
+        } //container
+       } //steps
+     } //stage
+     
+     stage('Test ruby') {
+      steps {
+        container('ruby') {
+          sh 'ruby -v'
+        } //container
+       } //steps
+     } //stage
+    
+    stage('Test jmeter') {
+      steps {
+          sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
+       } //steps
+     } //stage
+    
+    stage('Test aws-cli') {
+    steps {
       sh '''
         aws help
       '''
     }
   }
+     
+    } //parallel
+   } //stage 
   
-   } //parallel
-  } //Test
-  
-  stage('Test maven custom image') {
-      steps {
-        container('maven') {
-          sh 'mvn -version'
-       }
-     }
-   }
-
-  stage('Test tree') {
-   steps {
+   stage('tree command') {
+    steps {
       sh '''
         tree
       '''
       script {
         sleep 1
-      }
-    }
-  }
+      } //script
+     } //steps
+   } //stage
   
  } //stages
 } //pipeline

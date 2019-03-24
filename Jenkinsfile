@@ -42,9 +42,9 @@ pipeline {
   
   stage('Test jq') {
    steps {
-      sh 'jq'
+      sh 'jq '.[0] | {message: .commit.message, name: .commit.committer.name}''
       script {
-        sleep 200
+        sleep 1
       }
    }
   }

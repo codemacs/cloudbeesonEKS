@@ -58,14 +58,6 @@ pipeline {
    }
   }
   
-  stage('Test tree') {
-   steps {
-      sh '''
-        tree
-      '''
-   }
-  }
-  
   stage('Test Python') {
    steps {
       sh '''
@@ -88,5 +80,14 @@ pipeline {
   
    } //parallel
   } //Test
+  
+  stage('Test tree') {
+   steps {
+      sh '''
+        tree
+      '''
+   }
+  }
+  
  } //stages
 } //pipeline

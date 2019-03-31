@@ -17,12 +17,7 @@ pipeline {
   disableConcurrentBuilds()
  }
 
- parameters {
-  string(name: 'credentialId', defaultValue: 'github', description: 'github write access')
- }
-
  stages {
-
   stage('Test CJOC Tools') {
    parallel {
     stage('Java') {
@@ -30,6 +25,7 @@ pipeline {
       sh '''
       which java
       java -version 
+      pwd
       '''
      }
     }
@@ -37,6 +33,7 @@ pipeline {
     stage('Maven') {
      steps {
       sh "mvn --version"
+      sh "pwd"
      }
     }
 
@@ -44,16 +41,8 @@ pipeline {
   } //stage
 
 
-  stage('Test CloudBees Base Agent Image') {
+  stage('Test CDTeam Base Agent Image') {
    parallel {
-    stage('Git') {
-     steps {
-      sh '''
-      git clone https://github.com/forcedotcom/cli.git
-      '''
-     }
-    }
-
     stage('NodeJS') {
      steps {
       sh 'node -v'
@@ -64,6 +53,7 @@ pipeline {
      steps {
       sh '''
       curl 'https://api.github.com/repos/stedolan/jq/commits?per_page=5' | jq '.[0]'
+      pwd
       '''
      }
     }
@@ -72,6 +62,7 @@ pipeline {
      steps {
       sh '''
       python --version
+      pwd
       '''
      }
     }
@@ -80,6 +71,7 @@ pipeline {
      steps {
       sh '''
       pip freeze
+      pwd
       '''
      }
     }
@@ -96,6 +88,7 @@ pipeline {
      steps {
       sh '''
       gcc -v 
+      pwd
       '''
      }
     }
@@ -104,35 +97,41 @@ pipeline {
      steps {
       sh '''
       aws help
+      pwd
       '''
      }
     }
+    
+     stage('SFDX') {
+     steps {
+       sh 'npm install sfdx-cli --global'
+       sh 'sfdx plugins --core'
+       sh 'sfdx --version'
+       sh 'sfdx update'
+       sh 'sfdx --version'
+       sh 'pwd'
+       sh 'id'
+     }
+    } 
+    
+   stage('Jmeter') {
+     steps {
+      sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
+      sh 'pwd'
+     } //steps
+    } //stage
 
    } //parallel
   } //Test
 
   stage('3rd party Docker Images') {
    parallel {
-
-    stage('SFDX') {
-     steps {
-      container('sfdx') {
-       sh 'sfdx --version'
-      } //container
-     } //steps
-    } //stage
-
     stage('Ruby') {
      steps {
       container('ruby') {
        sh 'ruby -v'
+       sh 'pwd'
       } //container
-     } //steps
-    } //stage
-
-    stage('Jmeter') {
-     steps {
-      sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
      } //steps
     } //stage
 
@@ -146,6 +145,17 @@ pipeline {
 
    } //parallel
   } //stage 
+  
+  stage('list contents of the workspace') {
+   steps {
+      sh '''
+      tree 
+      hostname
+      pwd
+      sleep 1000
+      '''
+     }
+  }
 
  } //stages
 } //pipeline

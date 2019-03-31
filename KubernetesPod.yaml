@@ -9,13 +9,3 @@ spec:
     command:
     - cat
     tty: true
-  - name: pmd
-    image: codeclimate/codeclimate-pmd:b82
-    command:
-    - cat
-    tty: true
-  - name: sfdx
-    image: ncino/ci-sfdx:latest
-    command:
-    - cat
-    tty: true

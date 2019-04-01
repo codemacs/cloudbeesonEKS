@@ -20,6 +20,9 @@ pipeline {
  stages {
   stage('Test CJOC Tools') {
    parallel {
+    
+    
+    
     stage('Java') {
      steps {
       sh '''
@@ -43,6 +46,13 @@ pipeline {
 
   stage('Test CDTeam Base Agent Image') {
    parallel {
+    
+    stage('Salesforce Ant') {
+     steps {
+      sh 'ant -v'
+     }
+    }
+    
     stage('NodeJS') {
      steps {
       sh 'node -v'
@@ -120,6 +130,14 @@ pipeline {
       sh 'pwd'
      } //steps
     } //stage
+    
+    stage('Python3') {
+     steps {
+      sh '''
+      python3 --version
+      '''
+     }
+    }
 
    } //parallel
   } //Test
@@ -134,14 +152,6 @@ pipeline {
       } //container
      } //steps
     } //stage
-
-    stage('Python3') {
-     steps {
-      sh '''
-      python3 --version
-      '''
-     }
-    }
 
    } //parallel
   } //stage 

@@ -114,8 +114,7 @@ pipeline {
      steps {
       // sh 'npm install sfdx-cli --global'
       // sh 'sfdx plugins --core'
-         sh 'sleep 1000'
-      // sh 'sfdx --version'
+         sh 'sfdx --version'
       // sh 'sfdx update'
      //  sh 'sfdx --version'
        sh 'pwd'

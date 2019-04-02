@@ -20,9 +20,7 @@ pipeline {
  stages {
   stage('Test CJOC Tools') {
    parallel {
-    
-    
-    
+   
     stage('Java') {
      steps {
       sh '''
@@ -114,11 +112,11 @@ pipeline {
     
      stage('SFDX') {
      steps {
-       sh 'npm install sfdx-cli --global'
-       sh 'sfdx plugins --core'
+      // sh 'npm install sfdx-cli --global'
+      // sh 'sfdx plugins --core'
        sh 'sfdx --version'
-       sh 'sfdx update'
-       sh 'sfdx --version'
+      // sh 'sfdx update'
+     //  sh 'sfdx --version'
        sh 'pwd'
        sh 'id'
      }

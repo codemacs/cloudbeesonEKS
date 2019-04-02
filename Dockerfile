@@ -7,6 +7,7 @@ ENV PATH=$PATH:/home/jenkins/.npm-global/bin
 # install latest sfdx from npm
 RUN npm install sfdx-cli --global
 RUN sfdx --version
+RUN which sfdx
 RUN sfdx plugins --core
 RUN sfdx update
 

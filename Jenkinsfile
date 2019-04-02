@@ -110,10 +110,8 @@ pipeline {
      }
     }
     
-     stage('SFDX') {
+    stage('SFDX') {
      steps {
-         sh 'sfdx --version'
-         sh 'sfdx update'
          sh 'sfdx --version'
          sh 'pwd'
          sh 'id'

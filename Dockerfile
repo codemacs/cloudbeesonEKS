@@ -1,10 +1,6 @@
 FROM cloudbees/jnlp-slave-with-java-build-tools:latest
 USER root
-#==================== SFDX ===================#
-ENV NPM_CONFIG_PREFIX=/home/jenkins/.npm-global
-ENV PATH=$PATH:/home/jenkins/.npm-global/bin 
-
-# install latest sfdx from npm
+#==================== install latest sfdx from npm ===================#
 RUN npm install sfdx-cli --global
 RUN sfdx --version
 RUN which sfdx
@@ -12,7 +8,6 @@ RUN sfdx plugins --core
 RUN sfdx update
 
 COPY docker-entrypoint.sh .
-# Make the scripts executeable
 RUN chmod 755 docker-entrypoint.sh
 
 # Run the entrypoint script on startup

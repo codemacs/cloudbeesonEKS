@@ -106,7 +106,6 @@ pipeline {
       sh '''
       aws help
       pwd
-      sleep 1000
       '''
      }
     }
@@ -115,7 +114,8 @@ pipeline {
      steps {
       // sh 'npm install sfdx-cli --global'
       // sh 'sfdx plugins --core'
-       sh 'sfdx --version'
+         sh 'sleep 1000'
+      // sh 'sfdx --version'
       // sh 'sfdx update'
      //  sh 'sfdx --version'
        sh 'pwd'

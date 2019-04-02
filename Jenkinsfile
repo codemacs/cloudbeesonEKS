@@ -106,6 +106,7 @@ pipeline {
       sh '''
       aws help
       pwd
+      sleep 1000
       '''
      }
     }

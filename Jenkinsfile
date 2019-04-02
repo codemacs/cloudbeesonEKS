@@ -47,7 +47,8 @@ pipeline {
     
     stage('Salesforce Ant') {
      steps {
-      sh 'ant -v'
+      sh 'ant -Dsf.username=anassiry@salesforce.com.devpro46 -Dsf.password=H#ywire9538 -Dsf.serverurl=https://org62--devpro46.lightning.force.com -Ddev.directory=src deploy'
+'
      }
     }
     

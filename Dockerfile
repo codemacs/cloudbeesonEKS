@@ -43,4 +43,8 @@ RUN cd /tmp \
     && rm salesforce_ant_${SF_ANT_VERSION}.zip \
     && rm -rf salesforce-ant-${SF_ANT_VERSION} \
     && unset SF_ANT_VERSION
+
+#==================== Heroku Cli ====================================#
+RUN curl https://cli-assets.heroku.com/install.sh | sh
+
 USER jenkins

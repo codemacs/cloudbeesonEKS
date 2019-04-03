@@ -1,7 +1,7 @@
 pipeline {
  agent {
   kubernetes {
-   label 'CD-Team-Test'
+   label 'CD-Team'
    defaultContainer 'jnlp'
    yamlFile 'KubernetesPod.yaml'
   }
@@ -17,8 +17,12 @@ pipeline {
   disableConcurrentBuilds()
  }
 
+ parameters {
+  string(name: 'SFOrgCredentials', defaultValue: 'aaronOrg')
+ }
+ 
  stages {
-  stage('Test CJOC Tools') {
+  stage('CJOC Tools') {
    parallel {
    
     stage('Java') {
@@ -42,12 +46,22 @@ pipeline {
   } //stage
 
 
-  stage('Test CDTeam Base Agent Image') {
+  stage('CD Team Docker Image') {
    parallel {
+    
+    stage('Git') {
+     steps {
+      git credentialsId: 'ssh', url: 'git@github.com:aaronnassiry/cloudbeesonEKS.git'
+      
+     } //steps
+    } //stage
     
     stage('Salesforce Ant') {
      steps {
-      sh 'ant -Dsf.username=anassiry@salesforce.com.devpro46 -Dsf.password=H#ywire9538 -Dsf.serverurl=https://org62--devpro46.lightning.force.com -Ddev.directory=src deployCheckOnly'
+      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: params.SFOrgCredentials, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+         sh 'ant -verbose -Dsf.username=${USERNAME} -Dsf.password=${PASSWORD} -Dsf.serverurl=https://test.salesforce.com -Ddev.directory=src -Dsf.maxPoll=1000 deployCheckOnly'
+      }
+
      }
     }
     
@@ -156,7 +170,7 @@ pipeline {
       tree 
       hostname
       pwd
-      sleep 1
+      sleep 1000
       '''
      }
   }

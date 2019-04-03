@@ -12,7 +12,6 @@ RUN chmod 755 docker-entrypoint.sh
 
 # Run the entrypoint script on startup
 ENTRYPOINT ["/docker-entrypoint.sh"]
-# default CMD, should be run in shell so we'll skip the JSON syntax
 CMD sfdx help
 
 #==================== Salesforce Ant Migration tool ===================#

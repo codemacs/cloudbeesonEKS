@@ -58,6 +58,7 @@ pipeline {
     stage('Salesforce Ant') {
      steps {
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: params.SFOrgCredentials, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+         sh 'which ant'
          sh 'ant -verbose -Dsf.username=${USERNAME} -Dsf.password=${PASSWORD} -Dsf.serverurl=https://test.salesforce.com -Ddev.directory=src -Dsf.maxPoll=1000 deployCheckOnly'
       }
 

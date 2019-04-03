@@ -32,7 +32,7 @@ RUN cd /tmp \
     && rm -rf ant-${ANT_VERSION} \
     && rm -rf ${ANT_HOME}/manual \
     && unset ANT_VERSION
-ENV PATH ${PATH}:${ANT_HOME}/bin
+ENV PATH ${ANT_HOME}/bin:${PATH}
 
 # Salesforce Ant migration tool installation
 RUN cd /tmp \

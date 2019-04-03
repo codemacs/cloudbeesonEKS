@@ -52,7 +52,6 @@ pipeline {
     stage('Git') {
      steps {
       git credentialsId: 'ssh', url: 'git@github.com:aaronnassiry/cloudbeesonEKS.git'
-      
      } //steps
     } //stage
     
@@ -126,9 +125,10 @@ pipeline {
     
     stage('SFDX') {
      steps {
-         sh 'sfdx --version'
-         sh 'pwd'
-         sh 'id'
+         sh '''
+         sfdx --version
+         which sfdx
+         '''
      }
     } 
     
@@ -143,6 +143,15 @@ pipeline {
      steps {
       sh '''
       python3 --version
+      '''
+     }
+    }
+    
+    stage('Heroku') {
+     steps {
+      sh '''
+      heroku --version
+      which heroku
       '''
      }
     }

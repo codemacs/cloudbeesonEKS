@@ -13,9 +13,7 @@ RUN chmod 755 docker-entrypoint.sh
 # Run the entrypoint script on startup
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD sfdx help
-
 #==================== Salesforce Ant Migration tool ===================#
-
 ENV ANT_VERSION 1.10.5
 ENV ANT_HOME /opt/ant
 
@@ -43,8 +41,6 @@ RUN cd /tmp \
     && rm salesforce_ant_${SF_ANT_VERSION}.zip \
     && rm -rf salesforce-ant-${SF_ANT_VERSION} \
     && unset SF_ANT_VERSION
-
 #==================== Heroku Cli ====================================#
 RUN curl https://cli-assets.heroku.com/install.sh | sh
-
 USER jenkins

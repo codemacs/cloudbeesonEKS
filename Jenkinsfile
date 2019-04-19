@@ -140,7 +140,7 @@ pipeline {
     
    stage('Jmeter') {
      steps {
-      sh '/opt/jmeter/bin/jmeter -n -t my_test_plan.jmx -l log.jtl'
+      sh 'jmeter -n -t my_test_plan.jmx -l log.jtl'
       sh 'pwd'
      } //steps
     } //stage

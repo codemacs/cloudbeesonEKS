@@ -31,13 +31,6 @@ pipeline {
       '''
      }
   } //stage
-
-  stage('Maven') {
-     steps {
-      sh 'mvn --version'
-      sh 'pwd'
-     }
-   }
   
   stage('CD Team Docker Image') {
    parallel {
@@ -47,6 +40,13 @@ pipeline {
       sh 'git --version'
      } //steps
     } //stage
+    
+    stage('Maven') {
+     steps {
+      sh 'mvn --version'
+      sh 'pwd'
+     }
+    }
     
     stage('Salesforce Ant') {
      when {

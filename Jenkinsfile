@@ -8,7 +8,6 @@ pipeline {
  }
 
  tools {
-  maven 'CJOC-Maven3.6.1'
   jdk 'CJOC-JDK8u212'
  }
 

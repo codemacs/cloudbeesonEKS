@@ -21,10 +21,8 @@ pipeline {
  }
  
  stages {
-  stage('CJOC Tools') {
-   parallel {
-   
-    stage('Java') {
+  
+  stage('Java') {
      steps {
       sh '''
       which java
@@ -32,19 +30,15 @@ pipeline {
       pwd
       '''
      }
-    }
-
-    stage('Maven') {
-     steps {
-      sh "mvn --version"
-      sh "pwd"
-     }
-    }
-
-   } //parallel
   } //stage
 
-
+  stage('Maven') {
+     steps {
+      sh 'mvn --version'
+      sh 'pwd'
+     }
+   }
+  
   stage('CD Team Docker Image') {
    parallel {
     

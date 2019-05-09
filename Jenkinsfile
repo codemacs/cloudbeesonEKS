@@ -178,7 +178,7 @@ pipeline {
       tree 
       hostname
       pwd
-      sleep 1000
+      sleep 1
       '''
      }
   }

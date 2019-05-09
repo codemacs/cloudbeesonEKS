@@ -17,7 +17,7 @@ pipeline {
  }
 
  parameters {
-  string(name: 'SFOrgCredentials', defaultValue: 'aaronOrg')
+  string(name: 'SFOrgCredentials', defaultValue: 'DevHubOrg')
  }
  
  stages {
@@ -50,14 +50,14 @@ pipeline {
     
     stage('Git') {
      steps {
-      git credentialsId: 'ssh', url: 'git@github.com:aaronnassiry/cloudbeesonEKS.git'
+      sh 'git --version'
      } //steps
     } //stage
     
     stage('Salesforce Ant') {
      when {
       expression {
-       false
+       true
       }
      }
      steps {

@@ -7,10 +7,6 @@ pipeline {
   }
  }
 
- tools {
-  jdk 'CJOC-JDK8u212'
- }
-
  options {
   timeout(time: 2, unit: 'HOURS')
   disableConcurrentBuilds()

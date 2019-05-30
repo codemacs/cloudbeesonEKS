@@ -2,7 +2,7 @@ metadata:
   labels:
     label: CD-Team-Test
 spec:
-  serviceAccountName: efs-provisioner
+  serviceAccountName: jenkins
   containers:
   - name: ruby
     image: ruby:2.6.2-alpine3.8
